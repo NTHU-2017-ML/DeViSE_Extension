@@ -1,10 +1,13 @@
+<a name="MileStone2"/>
 # MileStone2
-*[MileStone2] (# MileStone2)
-    *[Image Pre-train Mdel] (## Image Pre-train Mdel)
-    *[Word2Vec Pre-train vector] (## Word2Vec Pre-train vector)
-
+[MileStone2] (#MileStone2)
+    [Image Pre-train Mdel] (##Image Pre-train Mdel)
+    [Word2Vec Pre-train vector] (##Word2Vec Pre-train vector)
+    
+<a name="Image Pre-train Mdel"/>
 ## Image Pre-train Mdel
 
+<a name="Word2Vec Pre-train vector"/>
 ## Word2Vec Pre-train vector
 1. Environment Setting:
     - Gensim: We use the gensim to load the pretrain vector.
