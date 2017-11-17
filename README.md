@@ -27,7 +27,7 @@
 2. Dataset: [Word2Vec pretrained vector]
     - Github: [fastText Pre-trained]
 
-    We use the model pretrained by Facebook Research which is called **fastText**.
+    We use the model pretrained by Facebook Research, **fastText**.
     It embeds words to vectors with dimension of 300.
 
 3. How to use it?
