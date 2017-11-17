@@ -1,6 +1,19 @@
 # MileStone2 - DeViSE on CIFAR10
 
 ## Core visual model
+1. Environment Setting:
+    - PyTorch: We choose **[PyTorch]** (see this link for installation instructions) as our deep learning framework.
+    
+2. Dataset: [CIFAR10]
+    - [PyTorch provided CIFAR10]
+    
+    We use normalized version of CIFAR10 provided by PyTorch, which is very easy to download.
+    
+3. CNN model: ResNet-18
+    - Github: [3rd party version of ResNet-18 on CIFAR10]
+    
+4. How to use it?
+    - First, `git clone` this project, and `cd` into `devise` folder.
 
 ## Word2Vec Pre-trained model
 1. Environment Setting:
@@ -9,8 +22,8 @@
     pip install gensim
     ```
 
-2. Data Set: [Word2Vec pretrained vector]
-    - github: [fastText Pre-trained]
+2. Dataset: [Word2Vec pretrained vector]
+    - Github: [fastText Pre-trained]
 
     We use the model pretrained by Facebook Research which is called **fastText**.
     It embeds words to vectors with dimension of 300.
@@ -42,3 +55,7 @@
 
 [Word2Vec pretrained vector]: https://s3-us-west-1.amazonaws.com/fasttext-vectors/wiki.en.vec
 [fastText Pre-trained]: https://github.com/facebookresearch/fastText/blob/master/pretrained-vectors.md
+[PyTorch]:http://pytorch.org/
+[CIFAR10]:https://www.cs.toronto.edu/~kriz/cifar.html
+[PyTorch provided CIFAR10]:http://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html#loading-and-normalizing-cifar10
+[3rd party version of ResNet-18 on CIFAR10]:https://github.com/kuangliu/pytorch-cifar/blob/master/models/resnet.py
