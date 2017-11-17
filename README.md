@@ -26,6 +26,7 @@
 
 2. Dataset: [Word2Vec pretrained vector]
     - Github: [fastText Pre-trained]
+    - Resource: [Pre-train vector dataset]
 
     We use the model pretrained by Facebook Research, **fastText**.
     It embeds words to vectors with dimension of 300.
@@ -61,3 +62,4 @@
 [CIFAR10]:https://www.cs.toronto.edu/~kriz/cifar.html
 [PyTorch provided CIFAR10]:http://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html#loading-and-normalizing-cifar10
 [3rd party version of ResNet-18 on CIFAR10]:https://github.com/kuangliu/pytorch-cifar/blob/master/models/resnet.py
+[Pre-train vector dataset]: https://github.com/facebookresearch/fastText/blob/master/pretrained-vectors.md
