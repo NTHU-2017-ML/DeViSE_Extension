@@ -24,7 +24,7 @@
     pip install gensim
     ```
 
-2. Dataset: [Word2Vec pretrained vector]
+2. Dataset(English): [Word2Vec pretrained vector]
     - Github: [fastText Pre-trained]
     - Resource: [Pre-train vector dataset]
 
