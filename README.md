@@ -1,27 +1,27 @@
-# MileStone2
+# MileStone2 - DeViSE on CIFAR10
 
-## Image Pre-train Mdel
+## Core visual model
 
-## Word2Vec Pre-train vector
+## Word2Vec Pre-trained model
 1. Environment Setting:
-    - Gensim: We use the gensim to load the pretrain vector.
+    - Gensim: We use **gensim** to load the pretrain vector.
     ```
     pip install gensim
     ```
 
-2. Data Set: [Word2Vec pretrain vector]
-    - github: [fastText Pre-train]
+2. Data Set: [Word2Vec pretrained vector]
+    - github: [fastText Pre-trained]
 
-    We use the facebook's research that is called fastText.
-    It provide us 300-D word's embedding space.
+    We use the model pretrained by Facebook Research which is called **fastText**.
+    It embeds words to vectors with dimension of 300.
 
-3. How to use?
-    - Load the model by gensim.
+3. How to use it?
+    - Load the pretrained model through **gensim**.
     ```
     import gensim
     model = gensim.models.KeyedVectors.load_word2vec_format("wiki.en.vec", binary=False)
     ```
-    - Use the Image dataset's label to get the target embedding space.
+    - Get the embedding vectors of CIFAR10's class labels 
     ```
     classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
@@ -29,7 +29,7 @@
     for i in range(len(classes)):
         output[i] = model.wv[classes[i]]
     ```
-    - Write the target embedding space to picke file
+    - Write the embedding vectors of those classes to a pickle file
      ```
     import pickle
 
@@ -37,8 +37,8 @@
     pickle.dump(output, output_file, protocol=2)
     output_file.close()
     ```
-    - Target embedding space could provide DeViSE model lookup table
+    - The saved pickle could be used as a lookup table for the *core visual model*
 
 
-[Word2Vec pretrain vector]: https://s3-us-west-1.amazonaws.com/fasttext-vectors/wiki.en.vec
-[fastText Pre-train]: https://github.com/facebookresearch/fastText/blob/master/pretrained-vectors.md
+[Word2Vec pretrained vector]: https://s3-us-west-1.amazonaws.com/fasttext-vectors/wiki.en.vec
+[fastText Pre-trained]: https://github.com/facebookresearch/fastText/blob/master/pretrained-vectors.md
