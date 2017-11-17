@@ -36,7 +36,7 @@
     import gensim
     model = gensim.models.KeyedVectors.load_word2vec_format("wiki.en.vec", binary=False)
     ```
-    - Get the embedding vectors of CIFAR10's class labels 
+    - Get the embedding vectors of CIFAR10's class labels.
     ```
     classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
@@ -44,7 +44,7 @@
     for i in range(len(classes)):
         output[i] = model.wv[classes[i]]
     ```
-    - Write the embedding vectors of those classes to a pickle file
+    - Write the embedding vectors of those classes to a pickle file.
      ```
     import pickle
 
@@ -52,7 +52,7 @@
     pickle.dump(output, output_file, protocol=2)
     output_file.close()
     ```
-    - The saved pickle could be used as a lookup table for the *core visual model*
+    - The saved pickle could be used as a lookup table for the *core visual model*.
 
 
 [Word2Vec pretrained vector]: https://s3-us-west-1.amazonaws.com/fasttext-vectors/wiki.en.vec
