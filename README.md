@@ -13,7 +13,9 @@
     - Github: [3rd party version of ResNet-18 on CIFAR10]
     
 4. How to use it?
-    - First, `git clone` this project, and `cd` into `devise` folder.
+    - `git clone` this project, and `cd` into `devise` folder.
+    - Now first run `devise_pretrain_main.py` to pretrain the core visual model, it will save the best version checkpoint.
+    - After having a satisfying pretrained model saved, run `devise_finetune_main.py` to finetune it. And that's it!
 
 ## Word2Vec Pre-trained model
 1. Environment Setting:
