@@ -1,4 +1,3 @@
-<a name="MileStone2"/>
 # MileStone2
 
 ## Image Pre-train Mdel
