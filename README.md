@@ -57,7 +57,7 @@
 
 
 [Word2Vec pretrained vector]: https://s3-us-west-1.amazonaws.com/fasttext-vectors/wiki.en.vec
-[fastText Pre-trained]: https://github.com/facebookresearch/fastText/blob/master/pretrained-vectors.md
+[fastText Pre-trained]: https://github.com/facebookresearch/fastText
 [PyTorch]:http://pytorch.org/
 [CIFAR10]:https://www.cs.toronto.edu/~kriz/cifar.html
 [PyTorch provided CIFAR10]:http://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html#loading-and-normalizing-cifar10
