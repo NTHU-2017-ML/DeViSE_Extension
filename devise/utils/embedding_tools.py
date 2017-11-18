@@ -39,7 +39,6 @@ class EmbeddingTools():
         predictions = predictions.max(dim=1)[1]
         return predictions
         
-
     def prepare_all_class_embeddings(self, batch_size):
         # generate embedding vector matrices for all class
         class_embeddings_expanded = []

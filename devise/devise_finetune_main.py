@@ -44,7 +44,7 @@ if __name__ == '__main__':
     batch_size = 128
     saturate_patience = 12
     reduce_patience = 4
-    margin = 7.5
+    margin = 0.1
 
     # Initialize
     cifar10_embeddings_dict = pickle_tools.load_pickle(cifar10_embeddings_dict_name)

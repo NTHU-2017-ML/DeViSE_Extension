@@ -16,15 +16,17 @@ class MaxMarginLoss(nn.Module):
         """
         self.batch_size = targets.size(0)
         self.class_embeddings_expanded = self.embedding_tools.prepare_all_class_embeddings(self.batch_size)
+        num_classes = len(self.class_embeddings_expanded)
 
         # use word2vec look-up-table to retrieve corresponding embedding vectors
         target_embeddings = self.embedding_tools.lookup_embedding_vectors(inputs, targets)
         
-        #loss = torch.sum(inputs * target_embeddings, 1) * -10
-        loss = self.cos(inputs, target_embeddings) * -10
+        #loss = torch.sum(inputs * target_embeddings, 1) * (-num_classes)
+        loss = self.cos(inputs, target_embeddings) * (-num_classes)
         for class_embedding_expanded in self.class_embeddings_expanded:
             #loss = loss + torch.sum(inputs * class_embedding_expanded, 1)
             loss = loss + self.cos(inputs, class_embedding_expanded)
 
-        loss = torch.max(Variable(torch.zeros(loss.size())).cuda(), self.margin + loss).sum() / self.batch_size
+        zeros = Variable(torch.zeros(loss.size())).cuda()
+        loss = torch.max(zeros, self.margin * (num_classes - 1) + loss).sum() / self.batch_size
         return loss
