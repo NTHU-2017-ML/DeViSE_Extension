@@ -15,7 +15,7 @@ from utils.embedding_tools import EmbeddingTools
 
 
 parser = argparse.ArgumentParser(description='PyTorch Devise Finetuning')
-parser.add_argument('--lr', default=0.1, type=float, help='learning rate')
+parser.add_argument('--lr', default=0.005, type=float, help='learning rate')
 parser.add_argument('--resume', default='', type=str, metavar='PATH',
                     help='path to the latest checkpoint (default: none)')
 
@@ -44,6 +44,7 @@ if __name__ == '__main__':
     batch_size = 128
     saturate_patience = 12
     reduce_patience = 4
+    cooldown = 12
     margin = 0.1
 
     # Initialize
@@ -71,6 +72,7 @@ if __name__ == '__main__':
                                  classes=classes,
                                  saturate_patience=saturate_patience,
                                  reduce_patience=reduce_patience,
+                                 cooldown=cooldown,
                                  csv_log_name=csv_log_name,
                                  checkpoint_name=checkpoint_name,
                                  best_model_name=best_model_name,

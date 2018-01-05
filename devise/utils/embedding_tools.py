@@ -47,3 +47,6 @@ class EmbeddingTools():
             class_embeddings_expanded.append(class_embedding_expanded)
 
         return class_embeddings_expanded
+
+    def prepare_all_class_embeddings_new(self):
+        return self.class_embeddings

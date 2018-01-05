@@ -13,7 +13,8 @@ import torchvision.models as models
 
 
 class TrainingFlow():
-    def __init__(self, model=None, params_to_optimize=None, loss_function=None, compute_batch_accuracy=None, epochs=200, lr=0.1, batch_size=32, classes=None, saturate_patience=20, reduce_patience=5,
+    def __init__(self, model=None, params_to_optimize=None, loss_function=None, compute_batch_accuracy=None, epochs=200, lr=0.1, batch_size=32, classes=None,
+                 saturate_patience=20, reduce_patience=5, cooldown=12,
                  csv_log_name='', checkpoint_name='', best_model_name='', arch='', optimizer_type='Adam', args=None):
         self.model = model
         self.params_to_optimize = params_to_optimize
@@ -25,6 +26,7 @@ class TrainingFlow():
         self.classes = classes
         self.saturate_patience = saturate_patience
         self.reduce_patience = reduce_patience
+        self.cooldown = cooldown
         self.csv_log_name = csv_log_name
         self.checkpoint_name = checkpoint_name
         self.best_model_name = best_model_name
@@ -58,7 +60,7 @@ class TrainingFlow():
             self.optimizer = Adam(self.params_to_optimize, lr=self.lr)
 
     def set_scheduler(self):
-        self.scheduler = lr_scheduler.ReduceLROnPlateau(self.optimizer, 'max', patience=self.reduce_patience, verbose=True)
+        self.scheduler = lr_scheduler.ReduceLROnPlateau(self.optimizer, 'max', patience=self.reduce_patience, cooldown=self.cooldown, verbose=True)
 
     def resume(self):
         args = self.args
@@ -167,16 +169,17 @@ class TrainingFlow():
         self.print_val_statistics()
 
     def write_csv_logs(self):
-        column_names = ['Epoch', 'Arch', 'Optimizer-type', 'Learning-rate', 'Batch-size', 'Saturate-patience', 'Train-Loss', 'Train-Acc', 'Val-Acc']
+        column_names = ['Epoch', 'Arch', 'Optimizer-type', 'Learning-rate', 'Batch-size', 'Saturate-patience', 'Cooldown', 'Train-Loss', 'Train-Acc', 'Val-Acc']
         info_dict = {column_names[0]: [self.epoch],
                      column_names[1]: [self.arch],
-                     column_names[2]: [self.optimizer_type],
-                     column_names[3]: [self.lr],
+                     column_names[2]: [str(type(self.optimizer))],
+                     column_names[3]: [self.optimizer.param_groups[0]['lr']],
                      column_names[4]: [self.batch_size],
                      column_names[5]: [self.saturate_patience],
-                     column_names[6]: [round(self.train_epoch_loss, 3)],
-                     column_names[7]: [round(self.train_epoch_acc, 3)],
-                     column_names[8]: [round(self.val_acc, 3)]}
+                     column_names[6]: [self.cooldown],
+                     column_names[7]: [round(self.train_epoch_loss, 3)],
+                     column_names[8]: [round(self.train_epoch_acc, 3)],
+                     column_names[9]: [round(self.val_acc, 3)]}
 
         csv_log_name = self.csv_log_name
         data_frame = pd.DataFrame.from_dict(info_dict)
