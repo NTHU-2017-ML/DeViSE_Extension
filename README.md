@@ -3,6 +3,8 @@
 ## Core visual model
 1. Environment Setting:
     - PyTorch: We choose **[PyTorch]** (see this link for installation instructions) as our deep learning framework.
+    - `tqdm` and `pandas` are also required to be installed.
+    - We use `conda` to install packages listed above.
     
 2. Dataset: [CIFAR10]
     - [PyTorch provided CIFAR10]
