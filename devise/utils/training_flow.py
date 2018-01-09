@@ -13,8 +13,9 @@ import torchvision.models as models
 
 
 class TrainingFlow():
+
     def __init__(self, model=None, params_to_optimize=None, loss_function=None, compute_batch_accuracy=None, epochs=200, lr=0.1, batch_size=32, classes=None,
-                 saturate_patience=20, reduce_patience=5, cooldown=12,
+                 saturate_patience=20, reduce_patience=5, cooldown=4,
                  csv_log_name='', checkpoint_name='', best_model_name='', arch='', optimizer_type='Adam', args=None):
         self.model = model
         self.params_to_optimize = params_to_optimize

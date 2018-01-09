@@ -4,6 +4,7 @@ from torch.autograd import Variable
 
 
 class EmbeddingTools():
+    
     def __init__(self, cifar10_embeddings_dict=None, num_classes=None, embedding_dim=None):
         self.cifar10_embeddings_dict = cifar10_embeddings_dict
         self.num_classes = num_classes
@@ -38,15 +39,3 @@ class EmbeddingTools():
             
         predictions = predictions.max(dim=1)[1]
         return predictions
-        
-    def prepare_all_class_embeddings(self, batch_size):
-        # generate embedding vector matrices for all class
-        class_embeddings_expanded = []
-        for class_embedding in self.class_embeddings:
-            class_embedding_expanded = class_embedding.expand(batch_size, class_embedding.size(0))
-            class_embeddings_expanded.append(class_embedding_expanded)
-
-        return class_embeddings_expanded
-
-    def prepare_all_class_embeddings_new(self):
-        return self.class_embeddings

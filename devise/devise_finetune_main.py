@@ -15,23 +15,27 @@ from utils.embedding_tools import EmbeddingTools
 
 
 parser = argparse.ArgumentParser(description='PyTorch Devise Finetuning')
-parser.add_argument('--lr', default=0.005, type=float, help='learning rate')
+parser.add_argument('--lr', default=0.00005, type=float, help='learning rate')
+parser.add_argument('--margin', default=1, type=float, help='margin for devise-loss')
 parser.add_argument('--resume', default='', type=str, metavar='PATH',
                     help='path to the latest checkpoint (default: none)')
 
 
 if __name__ == '__main__':
     # Parameters
-    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
-    cifar10_embeddings_dict_name = '../word2vec/cifar-10_embeddeds.pkl'
+
+    pretrained_checkpoint_name = 'records/pretrained/cifar10/best_model.pth.tar'
+
+    word2vec_embedding_dim = 300
+    cifar10_embeddings_dict_path = '../word2vec/output_cifar10_300.pkl'  # CIFAR-10 dim=300
+    #cifar10_embeddings_dict_path = '../word2vec/output_cifar10_500.pkl'  # CIFAR-10 dim=500
+    #cifar10_embeddings_dict_path = '../word2vec/output_cifar10_1000.pkl'  # CIFAR-10 dim=1000
 
     csv_log_name = 'records/finetune_log.csv'
     checkpoint_name = 'records/finetune_checkpoint.pth.tar'
     best_model_name = 'records/finetune_best_model.pth.tar'
-    pretrained_checkpoint_name = 'records/best_model.pth.tar'
-
-    word2vec_embedding_dim = 300
 
     arch = 'ResNet18'
     optimizer_type = 'SGD'
@@ -44,17 +48,19 @@ if __name__ == '__main__':
     batch_size = 128
     saturate_patience = 12
     reduce_patience = 4
-    cooldown = 12
-    margin = 0.1
+    cooldown = 2
+    margin = args.margin
 
     # Initialize
-    cifar10_embeddings_dict = pickle_tools.load_pickle(cifar10_embeddings_dict_name)
+    cifar10_embeddings_dict = pickle_tools.load_pickle(cifar10_embeddings_dict_path)
     embedding_tools = EmbeddingTools(cifar10_embeddings_dict=cifar10_embeddings_dict, num_classes=len(classes), embedding_dim=word2vec_embedding_dim)
 
     pretrained_checkpoint = torch.load(pretrained_checkpoint_name)
     base_model = resnet.ResNet18()
     base_model = nn.DataParallel(base_model).cuda()
-    model = devise_cnn.convert_devise_cnn(base_model, pretrained_checkpoint, word2vec_embedding_dim)
+    
+    #model = devise_cnn.convert_devise_cnn(base_model, pretrained_checkpoint, word2vec_embedding_dim)  # model with linear transformation layer
+    model = devise_cnn.convert_enhanced_devise_cnn(base_model, pretrained_checkpoint, word2vec_embedding_dim)  # model with non-linear transformation layer
 
     #params_to_optimize = model.module.linear.parameters()
     params_to_optimize = model.parameters()

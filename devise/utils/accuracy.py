@@ -1,4 +1,5 @@
 class Accuracy():
+    
     def __init__(self, embedding_tools=None):
         self.embedding_tools = embedding_tools
 
