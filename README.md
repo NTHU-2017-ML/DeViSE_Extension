@@ -1,4 +1,4 @@
-# MileStone2 - DeViSE on CIFAR10
+# DeViSE extension on CIFAR10 (milestone 2 & 3)
 
 ## Core visual model
 1. Environment Setting:
